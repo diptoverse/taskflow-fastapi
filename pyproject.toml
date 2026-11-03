@@ -3,4 +3,6 @@ name = "taskflow-fastapi"
 version = "0.1.0"
 description = "Multi-user task API built with FastAPI and PostgreSQL"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "fastapi[standard]>=0.162.0",
+]
