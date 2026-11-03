@@ -12,7 +12,7 @@ cp .env.example .env
 ```
 
 ## Roadmap
-- [ ] Sprint 0: Project setup
+- [x] Sprint 0: Project setup
 - [ ] Sprint 1: FastAPI foundation
 - [ ] Sprint 2: PostgreSQL and SQLAlchemy
 - [ ] Sprint 3: Task CRUD and validation
