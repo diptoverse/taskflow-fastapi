@@ -11,6 +11,13 @@ uv sync
 cp .env.example .env
 ```
 
+## Run the API
+```bash
+uv run uvicorn app.main:app --reload
+```
+Then open http://127.0.0.1:8000/docs
+
+
 ## Roadmap
 - [x] Sprint 0: Project setup
 - [ ] Sprint 1: FastAPI foundation
