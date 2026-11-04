@@ -46,9 +46,47 @@ Every change gets reviewed, and the rule on GitHub holds even when I forget the 
 
 ---
 
-### Retro
-The ruleset said "created" but had no target, so it protected nothing. Test safety rules; don't assume they work.
+
+## Sprint 1: FastAPI foundation
+Goal: a running API with one route, a health check, docs and config.
 
 ---
 
-## Sprint 1: FastAPI foundation
+### Subtask I: First FastAPI app
+- `uv add "fastapi[standard]"` installs FastAPI and Uvicorn
+- `app = FastAPI()` creates the app; `@app.get("/")` binds GET / to a function
+- A returned dict becomes a JSON response automatically
+
+This proved the full cycle: request → Uvicorn → FastAPI → function → JSON response.
+
+---
+
+### Subtask II: Health endpoint in its own router
+- `APIRouter` in `app/api/routes/health.py`, plugged in with `app.include_router`
+- `GET /health` returns `{"status": "ok"}`, with no database involved
+
+Routes are grouped by feature in their own files, so `main.py` stays small. Monitors and Docker use `/health` to check the app is alive.
+
+---
+
+### Subtask III: Uvicorn and interactive docs
+- `uv run uvicorn app.main:app --reload` (module `app/main.py`, variable `app`)
+- `title`, `version` and `description` on `FastAPI(...)`
+- `/openapi.json` is the contract; `/docs` (try it) and `/redoc` (read it) are views of it
+
+This is the real startup command Docker will use, and the docs are generated from the code, so they never go stale.
+
+---
+
+### Subtask IV: Settings from the environment
+- `Settings(BaseSettings)` in `app/core/config.py` reads `.env`
+- Priority: real env var > `.env` > default
+- `get_settings()` with `@lru_cache` builds settings once
+- A required field with no default makes the app fail fast at startup
+
+The same code runs everywhere, and only the environment changes (12-factor config). Secrets will never be in the code.
+
+---
+
+## Sprint 2: PostgreSQL and SQLAlchemy
+

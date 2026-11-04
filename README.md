@@ -20,7 +20,7 @@ Then open http://127.0.0.1:8000/docs
 
 ## Roadmap
 - [x] Sprint 0: Project setup
-- [ ] Sprint 1: FastAPI foundation
+- [x] Sprint 1: FastAPI foundation
 - [ ] Sprint 2: PostgreSQL and SQLAlchemy
 - [ ] Sprint 3: Task CRUD and validation
 - [ ] Sprint 4: Authentication
